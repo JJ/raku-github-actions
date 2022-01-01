@@ -1,33 +1,19 @@
-package GitHub::Actions;
-
-use Exporter 'import'; # needed to use @EXPORT
-use warnings;
-use strict;
-use Carp;
-
-use v5.14;
+unit module GitHub::Actions;
 
 # Module implementation here
 our %github;
 our $EXIT_CODE = 0;
 
-our @EXPORT = qw(
-                  %github set_output set_env debug error warning
-                  set_failed error_on_file warning_on_file
-                  start_group end_group exit_action
-               );
-
 BEGIN {
-  for my $k ( keys(%ENV) ) {
-    if ( $k =~ /^GITHUB_/ ) {
+  for %*ENV.kv -> ($k, $v) {
+    if ( $k ~~ /^GITHUB_/ ) {
       my ($nogithub) = ( $k =~ /^GITHUB_(\w+)/ );
-      $github{$nogithub} = $ENV{$k} ;
+      %github{$nogithub} = $v ;
     }
   }
 }
 
-use version; our $VERSION = qv('0.1.1.1');
-
+=begin comment
 sub set_output {
   carp "Need name and value" unless @_;
   my ($output_name, $output_value) = @_;
@@ -97,18 +83,16 @@ sub exit_action {
   exit( $EXIT_CODE );
 }
 
-"Action!"; # Magic true value required at end of module
-__END__
+=end comment
 
 =head1 NAME
 
-GitHub::Actions - Work in GitHub Actions using Perl
+GitHub::Actions - Work in GitHub Actions using Raku
 
 
 =head1 VERSION
 
-This document describes GitHub::Actions version 0.1.1.1
-
+This document describes GitHub::Actions version 0.0.1
 
 =head1 SYNOPSIS
 
@@ -150,7 +134,7 @@ This document describes GitHub::Actions version 0.1.1.1
 
 Install this module within a GitHub action
 
-      . name: "Install GitHub::Actions"
+      - name: "Install GitHub::Actions"
         run: sudo cpan GitHub::Actions
 
 (we need C<sudo> since we're using the system Perl)
@@ -268,12 +252,13 @@ Please report any bugs or feature requests to L<https://github.com/JJ/perl-GitHu
 
 =head1 AUTHOR
 
-JJ Merelo  C<< <jmerelo@CPAN.org> >>. Many thanks to RENEEB and Gabor Szabo for their help with test and metadata.
+JJ Merelo  C<< <jj@raku.org> >>. Many thanks to RENEEB and Gabor Szabo for
+their help with test and metadata.
 
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2021, JJ Merelo C<< <jmerelo@CPAN.org> >>. All rights reserved.
+Copyright (c) 2021, JJ Merelo C<< <jj@raku.org> >>. All rights reserved.
 
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.
