@@ -5,9 +5,9 @@ our %github;
 our $EXIT_CODE = 0;
 
 BEGIN {
-  for %*ENV.kv -> ($k, $v) {
+  for %*ENV.kv -> $k, $v {
     if ( $k ~~ /^GITHUB_/ ) {
-      my ($nogithub) = ( $k =~ /^GITHUB_(\w+)/ );
+      my ($nogithub) = ( $k ~~ /^GITHUB_(\w+)/ );
       %github{$nogithub} = $v ;
     }
   }
@@ -84,6 +84,8 @@ sub exit_action {
 }
 
 =end comment
+
+=begin pod
 
 =head1 NAME
 
@@ -286,3 +288,5 @@ RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
 FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
+
+=end pod

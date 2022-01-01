@@ -1,5 +1,5 @@
 {
-  "name": "Your::Module::Name::Here",
+  "name": "GitHub::Actions",
   "description": "Raku distribution template",
   "version": "0.0.1",
   "perl": "6.d",
@@ -11,13 +11,17 @@
     "Test",
     "Test::META"
   ],
-  "provides": {},
+  "provides": {
+    "GitHub::Actions": "lib/GitHub/Actions.rakumod"
+  },
   "resources": [
     ".resources_files_go_here"
   ],
   "license": "Artistic-2.0",
   "tags": [
-    "modules","template","test"
+    "modules",
+    "template",
+    "test"
   ],
   "source-url": ""
 }
