@@ -1,14 +1,14 @@
 unit module GitHub::Actions;
 
 # Module implementation here
-our %github;
+our %github is export;
 our $EXIT_CODE = 0;
 
 BEGIN {
   for %*ENV.kv -> $k, $v {
     if ( $k ~~ /^GITHUB_/ ) {
-      my ($nogithub) = ( $k ~~ /^GITHUB_(\w+)/ );
-      %github{$nogithub} = $v ;
+      $k ~~ /^GITHUB_$<nogithub>=(\w+)/;
+      %github{$<nogithub>} = $v ;
     }
   }
 }
