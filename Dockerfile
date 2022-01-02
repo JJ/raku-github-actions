@@ -2,9 +2,10 @@ FROM ghcr.io/jj/raku-zef-gha:latest
 
 LABEL version="1.0.3" maintainer="JJ@Graku.org"
 
-COPY META6.json .
-COPY t/ t/
-COPY lib/ lib/
+COPY --chown=raku META6.json .
+COPY --chown=raku t/ t/
+COPY --chown=raku lib/ lib/
+USER raku
 RUN zef install . && rm -rf META6.json lib/ t/
 
 ENTRYPOINT ["raku"]
