@@ -3,7 +3,6 @@ use Test;
 BEGIN {
   %*ENV{'GITHUB_FOO'} = 'foo';
   %*ENV{'GITHUB_BAR'} = 'bar';
-  say "Setting ENV";
 }
 
 use GitHub::Actions;
@@ -13,6 +12,7 @@ for <foo bar>  -> $k {
 }
 
 if (%*ENV<CI> ) { # We're in an actual Github Action
+  diag(%github);
   is(%github{'ACTOR'}, %*ENV{'GITHUB_ACTOR'}, 'Action run by us' );
   like( %github{'EVENT_NAME'}, rx{^(push|pull_request)$}, "Activated by push
 or pull_request" );

@@ -5,7 +5,6 @@ our %github is export;
 our $EXIT_CODE = 0;
 
 INIT {
-    say "Setting ENV in GHA";
     for %*ENV.kv -> $k, $v {
         if ( $k ~~ /^GITHUB_/ ) {
             $k ~~ /^GITHUB_$<nogithub>=(\w+)/;
