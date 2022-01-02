@@ -130,10 +130,11 @@ Install this module within a GitHub action
 
 (we need C<sudo> since we're using the system Perl)
 
-You can use this as a C<step>
+You can use this as a C<step> (if you are running this inside a Raku
+container such as L<this one|https://github.com/JJ/alpine-raku>.
 
       - name: Test env variables
-        shell: perl {0}
+        shell: raku {0}
         run: |
           use GitHub::Actions;
           set-env( 'FOO', 'BAR');
