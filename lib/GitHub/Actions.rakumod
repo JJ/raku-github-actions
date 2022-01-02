@@ -17,27 +17,28 @@ sub set-output( Str:D $name!, $value = '') is export {
   say "::set-output name=$name\::$value";
 }
 
-
+sub cameliafy( $msg ) {
+    return "🦋 $msg"
+}
 
 sub set-env( Str:D $name!, $value = '') is export {
   %github<ENV>.IO.spurt( "$name=$value", :append );
 }
 
 sub debug( Str:D $message! ) is export {
-    say "::debug::$message";
+    say "::debug::" ~ cameliafy($message);
 }
 
 sub error( Str:D $message! ) is export {
   $EXIT_CODE = 1;
-  say "::error::$message"
+  say "::error::" ~ cameliafy($message);
+}
+
+sub warning( Str:D $message! ) is export {
+  say "::warning::" ~ cameliafy($message);
 }
 
 =begin comment
-
-sub warning {
-  my $warning = shift;
-  say "::warning::$warning"
-}
 
 sub error_on_file {
   command_on_file( "::error", @_ );

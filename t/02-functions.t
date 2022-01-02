@@ -27,15 +27,15 @@ sub setting_debug {
   debug('FOO');
 }
 
-stdout-is(&setting_debug,"::debug::FOO\n", "Sets output with empty value" );
+stdout-is(&setting_debug,"::debug::🦋 FOO\n", "Sets output with empty value" );
 
 sub setting_error {
   error('FOO');
 }
 
-=begin comment
+stdout-is(&setting_error,"::error::🦋 FOO\n", "Sets error with FOO value" );
 
-stdout_is(\&setting_error,"::error::FOO\n", "Sets error with FOO value" );
+=begin comment
 
 sub setting_warning {
   warning('FOO');
