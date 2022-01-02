@@ -3,6 +3,7 @@ use Test;
 BEGIN {
   %*ENV{'GITHUB_FOO'} = 'foo';
   %*ENV{'GITHUB_BAR'} = 'bar';
+  say "Setting ENV";
 }
 
 use GitHub::Actions;

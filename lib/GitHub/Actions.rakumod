@@ -4,13 +4,14 @@ unit module GitHub::Actions;
 our %github is export;
 our $EXIT_CODE = 0;
 
-BEGIN {
-  for %*ENV.kv -> $k, $v {
-    if ( $k ~~ /^GITHUB_/ ) {
-      $k ~~ /^GITHUB_$<nogithub>=(\w+)/;
-      %github{$<nogithub>} = $v ;
+INIT {
+    say "Setting ENV in GHA";
+    for %*ENV.kv -> $k, $v {
+        if ( $k ~~ /^GITHUB_/ ) {
+            $k ~~ /^GITHUB_$<nogithub>=(\w+)/;
+            %github{$<nogithub>} = $v ;
+        }
     }
-  }
 }
 
 =begin comment
