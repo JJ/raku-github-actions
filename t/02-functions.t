@@ -1,13 +1,20 @@
 use Test;
-
-use GitHub::Actions;
 use Test::Output;
+
+BEGIN {
+    %*ENV{'GITHUB_ENV'} //= '/tmp/github.env';
+}
+use GitHub::Actions;
 
 sub setting_output {
   set-output('FOO','BAR');
 }
 
 stdout-is(&setting_output,"::set-output name=FOO::BAR\n", "Sets output" );
+
+set-env("FOO", "bar");
+
+is( %github<ENV>.IO.slurp, "FOO=bar", "Setting env variables OK");
 
 =begin comment
 sub setting_empty_output {

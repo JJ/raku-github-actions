@@ -13,18 +13,17 @@ INIT {
     }
 }
 
-sub set-output ( Str:D $name!, $value = '') is export {
+sub set-output( Str:D $name!, $value = '') is export {
   say "::set-output name=$name\::$value";
 }
 
-=begin comment
 
-sub set_env {
-  my ($env_var_name, $env_var_value) = @_;
-  open(my $fh, '>>', $github{'ENV'}) or die "Could not open file ". $github{'ENV'} ." $!";
-  say $fh "$env_var_name=$env_var_value";
-  close $fh;
+
+sub set-env( Str:D $name!, $value = '') is export {
+  %github<ENV>.IO.spurt( "$name=$value", :append );
 }
+
+=begin comment
 
 sub debug {
   my $debug_message = shift;
