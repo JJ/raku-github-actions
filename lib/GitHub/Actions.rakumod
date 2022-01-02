@@ -48,8 +48,7 @@ sub warning-on-file( $msg, $file, $line, $col ) is export {
 }
 
 
-sub command-on-file( Str:D $command is copy, $message, $file, $line, $col ) is
-export {
+sub command-on-file( Str:D $command is copy, $message, $file, $line, $col ) {
   if ( $file ) {
     my @data;
     push( @data, "file=$file");
@@ -60,34 +59,28 @@ export {
   say $command ~ "::" ~ cameliafy($message);
 }
 
-
-=begin comment
-
-sub start_group {
-  say "::group::" . shift;
+sub start-group( $group-name ) is export {
+  say "::group::" ~ $group-name;
 }
 
-sub end_group {
+sub end-group is export {
   say "::endgroup::";
 }
 
-sub set_failed {
-  error( @_ );
+sub set-failed( *@args ) is export {
+  error( @args );
   exit( 1);
 }
 
-sub exit_action {
+sub exit-action is export {
   exit( $EXIT_CODE );
 }
-
-=end comment
 
 =begin pod
 
 =head1 NAME
 
 GitHub::Actions - Work in GitHub Actions using Raku
-
 
 =head1 VERSION
 
@@ -96,40 +89,39 @@ This document describes GitHub::Actions version 0.0.1
 =head1 SYNOPSIS
 
     use GitHub::Actions;
-    use v5.14;
 
     # Imported %github contains all GITHUB_* environment variables
-    for my $g (keys %github ) {
-       say "GITHUB_$g -> ", $github{$g}
+    for %github.kv -> $k, $v  {
+       say "GITHUB_$k -> ", $v
     }
 
     # Set step output
-    set_output("FOO", "BAR");
+    set-output("FOO", "BAR");
 
     # Set environment variable value
-    set_env("FOO", "BAR");
+    set-env("FOO", "BAR");
 
     # Produces an error and sets exit code to 1
     error( "FOO has happened" );
 
     # Error/warning with information on file
-    error_on_file( "There's foo", $file, $line, $col );
-    warning_on_file( "There's bar", $file, $line, $col );
+    error-on-file( "There's foo", $file, $line, $col );
+    warning-on-file( "There's bar", $file, $line, $col );
 
     # Debugging messages and warnings
     debug( "Value of FOO is $bar" );
     warning( "Value of FOO is $bar" );
 
     # Start and end group
-    start_group( "Foo" );
+    start-group( "Foo" );
     # do stuff
-    end_group;
+    end-group;
 
     # Exits with error if that's the case
-    exit_action();
+    exit-action();
 
     # Errors and exits
-    set_failed( "We're doomed" );
+    set-failed( "We're doomed" );
 
 Install this module within a GitHub action
 
@@ -144,7 +136,7 @@ You can use this as a C<step>
         shell: perl {0}
         run: |
           use GitHub::Actions;
-          set_env( 'FOO', 'BAR');
+          set-env( 'FOO', 'BAR');
 
 In most cases, you'll want to just have it installed locally and fatpack it to
 upload it to the repository.
@@ -165,56 +157,56 @@ Check out an example of using it in the L<repository|https://github.com/JJ/perl-
 
 =head1 INTERFACE
 
-=head2 set_env( $env_var_name, $env_var_value)
+=head2 set-env( $env-var-name, $env-var-value)
 
 This is equivalent to
 L<setting an environment variable|https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable>
 
-=head2 set_output( $output_name, $output_value)
+=head2 set-output( $output-name, $output-value)
 
-Equivalent to L<C<set_output>|https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-output-parameter>
+Equivalent to L<C<set-output>|https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-output-parameter>
 
-=head2 debug( $debug_message )
+=head2 debug( $debug-message )
 
 Equivalent to L<C<debug>|https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-a-debug-message>
 
-=head2 error( $error_message )
+=head2 error( $error-message )
 
 Equivalent to
 L<C<error>|https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-error-message>,
-prints an error message. Remember to call L<exit_action()> to make the step fail
+prints an error message. Remember to call L<exit-action()> to make the step fail
 if there's been some error.
 
-=head2 warning( $warning_message )
+=head2 warning( $warning-message )
 
 Equivalent to L<C<warning>|https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-a-warning-message>, simply prints a warning.
 
-=head2 command_on_file( $error_message, $file, $line, $col )
+=head2 command-on-file( $error-message, $file, $line, $col )
 
-Common code for L<error_on_file> and L<warning_on_file>. Can be used for any future commands.
+Common code for L<error-on-file> and L<warning-on-file>. Can be used for any future commands.
 
-=head2 error_on_file( $error_message, $file, $line, $col )
+=head2 error-on-file( $error-message, $file, $line, $col )
 
 Equivalent to L<C<error>|https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-error-message>, prints an error message with file and line info
 
-=head2 warning_on_file( $warning_message, $file, $line, $col )
+=head2 warning-on-file( $warning-message, $file, $line, $col )
 
 Equivalent to L<C<warning>|https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-a-warning-message>, prints an warning with file and line info.
 
-=head2 set_failed( $error_message )
+=head2 set-failed( $error-message )
 
 Exits with an error status of 1 after setting the error message.
 
-=head2 start_group( $group_name )
+=head2 start-group( $group-name )
 
 Starts a group in the logs, grouping the following messages. Corresponds to
 L<C<group>|https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#grouping-log-lines>.
 
-=head2 end_group
+=head2 end-group
 
 Ends current log grouping.
 
-=head2 exit_action
+=head2 exit-action
 
 Exits with the exit code generated during run, that is, 1 if there's been any
 error reported.

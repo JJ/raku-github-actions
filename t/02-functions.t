@@ -47,25 +47,26 @@ sub setting_warning {
 
 stdout-is(&setting_warning,"::warning::🦋 FOO\n", "Sets warning with FOO value" );
 
-=begin comment
-
 sub setting_error_on_file {
-  error_on_file('FOO', 'foo.pl', 1,1 );
+  error-on-file('FOO', 'foo.pl', 1,1 );
 }
-stdout_is(\&setting_error_on_file,"::error file=foo.pl,line=1,col=1::FOO\n", "Sets error with FOO value" );
+stdout-is(&setting_error_on_file,"::error file=foo.pl,line=1,col=1::🦋 FOO\n",
+        "Sets error with FOO value" );
 
 sub setting_warning_on_file {
-  warning_on_file('FOO', 'foo.pl', 1,1 );
+  warning-on-file('FOO', 'foo.pl', 1,1 );
 }
-stdout_is(\&setting_warning_on_file,"::warning file=foo.pl,line=1,col=1::FOO\n", "Sets warning with FOO value" );
+stdout-is(&setting_warning_on_file,
+        "::warning file=foo.pl,line=1,col=1::🦋 FOO\n",
+        "Sets warning with FOO value" );
 
-sub setting_group {
-  start_group( "foo");
+sub setting-group {
+  start-group( "foo" );
   warning("bar");
-  end_group;
+  end-group;
 }
-stdout_is(\&setting_group,"::group::foo\n::warning::bar\n::endgroup::\n", "Opens and closes a group" );
-
-=end comment
+stdout-is(&setting-group,
+        "::group::foo\n::warning::🦋 bar\n::endgroup::\n",
+        "Opens and closes a group" );
 
 done-testing;
