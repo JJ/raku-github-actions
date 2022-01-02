@@ -23,18 +23,16 @@ sub set-env( Str:D $name!, $value = '') is export {
   %github<ENV>.IO.spurt( "$name=$value", :append );
 }
 
-=begin comment
-
-sub debug {
-  my $debug_message = shift;
-  say "::debug::$debug_message";
+sub debug( Str:D $message! ) is export {
+    say "::debug::$message";
 }
 
-sub error {
-  my $error_message = shift;
+sub error( Str:D $message! ) is export {
   $EXIT_CODE = 1;
-  say "::error::$error_message"
+  say "::error::$message"
 }
+
+=begin comment
 
 sub warning {
   my $warning = shift;

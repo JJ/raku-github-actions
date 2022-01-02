@@ -16,22 +16,24 @@ set-env("FOO", "bar");
 
 is( %github<ENV>.IO.slurp, "FOO=bar", "Setting env variables OK");
 
-=begin comment
 sub setting_empty_output {
-  set_output('FOO');
+  set-output('FOO');
 }
 
-stdout_is(\&setting_empty_output,"::set-output name=FOO::\n", "Sets output with empty value" );
+stdout-is(&setting_empty_output,"::set-output name=FOO::\n", "Sets output
+with empty value" );
 
 sub setting_debug {
   debug('FOO');
 }
 
-stdout_is(\&setting_debug,"::debug::FOO\n", "Sets output with empty value" );
+stdout-is(&setting_debug,"::debug::FOO\n", "Sets output with empty value" );
 
 sub setting_error {
   error('FOO');
 }
+
+=begin comment
 
 stdout_is(\&setting_error,"::error::FOO\n", "Sets error with FOO value" );
 
