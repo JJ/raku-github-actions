@@ -1,8 +1,13 @@
 use Test;
 use Test::Output;
+use Temp::Path;
 
 BEGIN {
-    %*ENV{'GITHUB_ENV'} //= '/tmp/github.env';
+    my $temp-file-name;
+    with make-temp-path :suffix<env> {
+        $temp-file-name = .path;
+    }
+    %*ENV{'GITHUB_ENV'} //= $temp-file-name;
 }
 use GitHub::Actions;
 

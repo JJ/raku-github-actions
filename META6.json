@@ -10,7 +10,8 @@
   "test-depends": [
     "Test",
     "Test::META",
-    "Test::Output"
+    "Test::Output",
+    "Temp::Path"
   ],
   "provides": {
     "GitHub::Actions": "lib/GitHub/Actions.rakumod"
