@@ -36,7 +36,7 @@ jobs:
           fi
       - name: Test output
         id: output_test
-        shell: perl {0}
+        shell: raku {0}
         run:
           use GitHub::Actions;
           set_output( 'FOO', 'BAR');
