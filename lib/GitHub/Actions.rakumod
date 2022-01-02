@@ -13,13 +13,11 @@ INIT {
     }
 }
 
-=begin comment
-sub set_output {
-  carp "Need name and value" unless @_;
-  my ($output_name, $output_value) = @_;
-  $output_value ||='';
-  say "::set-output name=$output_name\::$output_value";
+sub set-output ( Str:D $name!, $value = ''){
+  say "::set-output name=$name\::$value";
 }
+
+=begin comment
 
 sub set_env {
   my ($env_var_name, $env_var_value) = @_;
