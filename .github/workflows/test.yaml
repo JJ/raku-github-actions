@@ -39,7 +39,7 @@ jobs:
         shell: raku {0}
         run:
           use GitHub::Actions;
-          set_output( 'FOO', 'BAR');
+          set-output( 'FOO', 'BAR');
       - name: Check test result
         env:
           OUTPUT_FOO: ${{ steps.output_test.outputs.FOO }}
