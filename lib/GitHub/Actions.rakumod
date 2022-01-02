@@ -38,29 +38,30 @@ sub warning( Str:D $message! ) is export {
   say "::warning::" ~ cameliafy($message);
 }
 
-=begin comment
 
-sub error_on_file {
-  command_on_file( "::error", @_ );
+sub error-on-file( $msg, $file, $line, $col ) is export {
+  command-on-file( "::error", $msg, $file, $line, $col );
 }
 
-sub warning_on_file {
-  command_on_file( "::warning", @_ );
+sub warning-on-file( $msg, $file, $line, $col ) is export {
+  command-on-file( "::warning", $msg, $file, $line, $col );
 }
 
-sub command_on_file {
-  my $command = shift;
-  my $message = shift;
-  my ($file, $line, $col ) = @_;
+
+sub command-on-file( Str:D $command is copy, $message, $file, $line, $col ) is
+export {
   if ( $file ) {
     my @data;
     push( @data, "file=$file");
     push( @data, "line=$line") if $line;
     push( @data, "col=$col") if $col;
-    $command .= " ".join(",", @data );
+    $command ~= " " ~ @data.join("," );
   }
-  say $command."::$message"
+  say $command ~ "::" ~ cameliafy($message);
 }
+
+
+=begin comment
 
 sub start_group {
   say "::group::" . shift;

@@ -40,13 +40,14 @@ sub setting_error {
 
 stdout-is(&setting_error,"::error::🦋 FOO\n", "Sets error with FOO value" );
 
-=begin comment
 
 sub setting_warning {
   warning('FOO');
 }
 
-stdout_is(\&setting_warning,"::warning::FOO\n", "Sets warning with FOO value" );
+stdout-is(&setting_warning,"::warning::🦋 FOO\n", "Sets warning with FOO value" );
+
+=begin comment
 
 sub setting_error_on_file {
   error_on_file('FOO', 'foo.pl', 1,1 );
