@@ -1,8 +1,10 @@
-# Raku Distribution Template
+# GitHub::Actions for Raku [![Test in a Raku container - template](https://github.com/JJ/raku-github-actions/actions/workflows/test.yaml/badge.svg)](https://github.com/JJ/raku-github-actions/actions/workflows/test.yaml)
 
-Template for Raku modules, classes, roles, to be distributed as a
-single package in the ecosystem. Fill this README with your
-instructions.
+Use the GitHub actions console API easily from Raku. Essentially, a port to 
+Raku of the [equivalent Perl module](https://metacpan.
+org/pod/GitHub::Actions). It's mainly intended to be run inside the [Raku 
+container for GitHub actions](https://github.com/JJ/alpine-raku), but can of 
+course be used independently.
 
 ## Installing
 
@@ -16,7 +18,8 @@ install from source -->
 
 ## See also
 
-<-- Related stuff -->
+Created from the 
+[Raku distribution template](https://github.com/JJ/raku-dist-template).
 
 ## License
 <-- 
