@@ -13,7 +13,7 @@ INIT {
     }
 }
 
-sub set-output ( Str:D $name!, $value = ''){
+sub set-output ( Str:D $name!, $value = '') is export {
   say "::set-output name=$name\::$value";
 }
 

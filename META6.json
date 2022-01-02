@@ -9,7 +9,8 @@
   "depends": [],
   "test-depends": [
     "Test",
-    "Test::META"
+    "Test::META",
+    "Test::Output"
   ],
   "provides": {
     "GitHub::Actions": "lib/GitHub/Actions.rakumod"

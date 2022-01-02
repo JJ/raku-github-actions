@@ -4,10 +4,10 @@ use GitHub::Actions;
 use Test::Output;
 
 sub setting_output {
-  set_output('FOO','BAR');
+  set-output('FOO','BAR');
 }
 
-stdout_is(\&setting_output,"::set-output name=FOO::BAR\n", "Sets output" );
+stdout-is(&setting_output,"::set-output name=FOO::BAR\n", "Sets output" );
 
 =begin comment
 sub setting_empty_output {
@@ -53,4 +53,4 @@ stdout_is(\&setting_group,"::group::foo\n::warning::bar\n::endgroup::\n", "Opens
 
 =end comment
 
-done_testing;
+done-testing;
