@@ -21,7 +21,6 @@ jobs:
         run: zef install --deps-only .
       - name: Test and install for more tests
         run: |
-          zef --debug test .
           zef install .
       - name: Test set-env
         shell: raku {0}
