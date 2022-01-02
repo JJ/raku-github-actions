@@ -5,6 +5,6 @@ LABEL version="1.0.3" maintainer="JJ@Graku.org"
 ADD META6.json .
 ADD lib/ .
 ADD t/ .
-RUN zef install . && rm META6.json && rm -rf lib/ t/
+RUN zef install . && rm -rf META6.json lib/ t/
 
 ENTRYPOINT ["raku"]
