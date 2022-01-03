@@ -11,3 +11,6 @@ lib/.precomp
 # comma
 .idea/
 *.iml
+
+# fez
+sdist/
