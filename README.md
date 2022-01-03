@@ -1,14 +1,14 @@
 # GitHub::Actions for Raku [![Test in a Raku container - template](https://github.com/JJ/raku-github-actions/actions/workflows/test.yaml/badge.svg)](https://github.com/JJ/raku-github-actions/actions/workflows/test.yaml)
 
-Use the GitHub actions console API easily from Raku. Essentially, a port to 
-Raku of the [equivalent Perl module](https://metacpan.org/pod/GitHub::Actions). It's mainly intended to be run inside the [Raku 
-container for GitHub actions](https://github.com/JJ/alpine-raku), but can of 
+Use the GitHub actions console API easily from Raku. Essentially, a port to
+Raku of the [equivalent Perl module](https://metacpan.org/pod/GitHub::Actions). It's mainly intended to be run inside the [Raku
+container for GitHub actions](https://github.com/JJ/alpine-raku), but can of
 course be used independently.
 
 ## Installing
 
 
-Install it the usual way, using `zef`: 
+Install it the usual way, using `zef`:
 
     zef install GitHub::Actions
 
@@ -33,13 +33,39 @@ this:
           set-output( 'FOO', 'BAR');
 ```
 
+Check [the Pod6 here](lib/GitHub/Actions.rakumod) for methods available.
+
+## Synopsis
+
+```raku
+
+use GitHub::Actions:
+
+say %github; # Contains all GITHUB_xyz variables
+
+set-output('FOO','BAR');
+set-output('FOO'); # Empty value
+set-env("FOO", "bar");
+debug('FOO');
+error('FOO');
+warning('FOO');
+
+error-on-file('FOO', 'foo.pl', 1,1 );
+
+warning-on-file('FOO', 'foo.raku', 1,1 );
+
+# sets group
+start-group( "foo" );
+warning("bar");
+end-group;
+```
 
 ## See also
 
-Created from the 
+Created from the
 [Raku distribution template](https://github.com/JJ/raku-dist-template).
 
 ## License
 
 (c) JJ Merelo, jj@raku.org, 2022
-Licensed, under the Artistic 2.0 License (the same as Raku itself). 
+Licensed, under the Artistic 2.0 License (the same as Raku itself).
