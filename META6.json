@@ -5,7 +5,7 @@
   "perl": "6.d",
   "meta-version": 1,
   "authors": [],
-  "auth": "",
+  "auth": "zef:JJMERELO",
   "depends": [],
   "test-depends": [
     "Test",
