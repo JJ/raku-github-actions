@@ -1,10 +1,10 @@
 {
   "name": "GitHub::Actions",
-  "description": "Raku distribution template",
+  "description": "Write GitHub Actions using Raku",
   "version": "0.0.1",
   "perl": "6.d",
   "meta-version": 1,
-  "authors": [],
+  "authors": ["JJ Merelo"],
   "auth": "zef:JJMERELO",
   "depends": [],
   "test-depends": [
