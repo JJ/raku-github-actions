@@ -22,5 +22,5 @@
     "template",
     "test"
   ],
-  "source-url": "https://github.com/JJ/raku-github-actions"
+  "source-url": "https://github.com/JJ/raku-github-actions.git"
 }
