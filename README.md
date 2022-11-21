@@ -1,7 +1,8 @@
 # GitHub::Actions for Raku [![Test in a Raku container - template](https://github.com/JJ/raku-github-actions/actions/workflows/test.yaml/badge.svg)](https://github.com/JJ/raku-github-actions/actions/workflows/test.yaml)
 
-Use the GitHub actions console API easily from Raku. Essentially, a port to
-Raku of the [equivalent Perl module](https://metacpan.org/pod/GitHub::Actions). It's mainly intended to be run inside the [Raku
+Use the GitHub actions console API easily from [Raku](https://raku.org). Essentially, a
+ port to
+Raku of the [equivalent Perl module](https://metacpan.org/pod/GitHub::Actions), mainly intended to be run inside the [Raku
 container for GitHub actions](https://github.com/JJ/alpine-raku), but can of
 course be used independently.
 
@@ -32,6 +33,9 @@ this:
           use GitHub::Actions;
           set-output( 'FOO', 'BAR');
 ```
+
+What this is doing is using the GHA syntax for using alternative shells
+ `shell`; the script in the `run` clause will be interpreted using that "shell".
 
 Check [the Pod6 here](lib/GitHub/Actions.rakumod) for methods available.
 
